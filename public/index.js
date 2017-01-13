@@ -215,10 +215,32 @@ function setPrice (rental, cars){
 	var reduc = (p * price )/100 ; 
 	
 	rental.price = price - reduc ; 
-
+	
+	setCommission(rental.price, t , rental); 
+	
 	return rental.price ; 
 }
 
+function setCommission (price , nbDay, rental){
+	
+	// Get commission 
+	var commission = price - ((price * 30 )/100); 
+	
+	// Set insurance part reset commsission 
+	rental.insurance = price / 2 ; 
+	
+	commission = commission - rental.insurance ; 
+	
+	// Set assistance
+	rental.assistance = nbDay ; 
+	
+	commission = commission - nbDay ; 
+	
+	// drivy 
+	
+	rental.drivy = commission ; 
+
+}
 
 console.log(setPrice(rentals[2], cars));
 
