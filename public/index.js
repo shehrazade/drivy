@@ -222,6 +222,7 @@ function setPrice (rental, cars){
 	rental.price = price - reduc ; 
 	
 	setCommission(rental.price, t , rental); 
+	setPayment(rental) ; 
 	
 	return rental.price ; 
 }
@@ -247,5 +248,34 @@ function setCommission (price , nbDay, rental){
 
 }
 
+function setPayment (rental){
+	
+	for (actor in actors) {
+		 if(actors[actor].rentalId = rental.id ){
+			
+			for(p in actors[actor].payment) {
+				
+				if(payment[p].who == 'driver'){
+					payment[p].amount = rental.price ; 
+				}
+				if(payment[p].who == 'owner'){
+					payment[p].amount = rental.price - rental.assistance - rental.insurance - rental.drivy ; 
+				}
+				if(payment[p].who == 'insurance'){
+					payment[p].amount = rental.insurance ; 
+				}
+				if(payment[p].who == 'assistance'){
+					payment[p].amount = rental.assistance ; 
+				}
+				if(payment[p].who == 'drivy'){
+					payment[p].amount = rental.drivy ; 
+				}
+				
+			}
+		 
+		 }
+	}
+
+}
 console.log(setPrice(rentals[2], cars));
 
