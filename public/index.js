@@ -193,7 +193,12 @@ function setPrice (rental, cars){
 	var dist = rental.distance * pricePerKm ; 
 	
 	// Set Price
-	var price =  t + dist
+	var price =  time + dist ; 
+	
+	if(rental.deductibleReduction = true ){
+		price = price + ( t * 4 ) ; 
+	}
+	
 	
 	// decrease by nb of day
 	var p ; 
