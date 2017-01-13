@@ -170,13 +170,6 @@ function getTime(pickupDate, returnDate){
 	var p = new Date(pickupDate); 
 	return ((r - p)/(1000*60*60*24)+1);  
 }
-		var time = getTime(pickupDate, returnDate); 
-		time = time*pricePerDay ; 
-		
-		var dist = distance * pricePerKm
-		
-		return time + dist ; 	
-}
 
 function setPrice (rental, cars){
 	// Get prices 
@@ -193,15 +186,36 @@ function setPrice (rental, cars){
 	}
 	
 	// Get Time Component
-	var time = getTime(rental.pickupDate , rental.returnDate); 
-	time = time * pricePerDay ; 
+	var t = getTime(rental.pickupDate , rental.returnDate); 
+	var time = t * pricePerDay ; 
 	
 	// Get Distance Component
 	var dist = rental.distance * pricePerKm ; 
 	
 	// Set Price
-	rental.price = time + dist ; 
+	var price =  t + dist
 	
+	// decrease by nb of day
+	var p ; 
+	
+	if (t > 1 )
+	{
+		p = 10 ; 
+	}
+	if (t > 4)
+	{
+		p = 40; 
+	}
+	if ( t > 10){
+		
+		p = 50 ; 
+	
+	}
+	
+	var reduc = (p * price )/100 ; 
+	
+	rental.price = price - reduc ; 
+
 	return rental.price ; 
 }
 
